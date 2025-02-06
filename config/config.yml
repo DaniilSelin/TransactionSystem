@@ -1,0 +1,12 @@
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: changeme
+  dbname: transaction_system
+  sslmode: disable
+  schema: TransactionSystem
+
+server:
+  host: 0.0.0.0
+  port: 8080
