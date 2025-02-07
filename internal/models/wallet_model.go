@@ -2,7 +2,8 @@ package models
 
 import ()
 
-type WALLET struct {
-	ID      string  `json:"id"` 
-	Balance float64 `json:"balance"`
-} 
+type Wallet struct {
+	Address   string    `json:"address"`
+	Balance   float64   `json:"balance"`
+	CreatedAt time.Time `json:"created_at"`
+}

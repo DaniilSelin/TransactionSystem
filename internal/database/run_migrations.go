@@ -14,6 +14,7 @@ func RunMigrations(ctx context.Context, conn *pgxpool.Pool) error {
 	files := []string{
 		"internal/database/migrations/create_wallets.sql",
 		"internal/database/migrations/create_transactions.sql",
+		"internal/database/migrations/create_idx_created_at.sql",
 	}
 
 	for _, file := range files {

@@ -1,7 +1,67 @@
 package repository
 
-import ()
+import (
+    "context"
 
-func CreateWallet(address string, balance float64) error
+    "github.com/jackc/pgx/v4/pgxpool"
+)
 
-func GetWalletBalance(address string) (float64, error)
+// Менеджер для кошельков
+type WalletRepository struct {
+	db *pgxpool.Pool
+}
+
+func NewWalletRepository(db *pgxpool.Pool) *WalletRepository {
+	return &WalletRepository(db: db)
+}
+
+func (wr *WalletRepository) CreateWallet(ctx context.Context, address string, balance float64) error {
+	query := `INSERT INTO "TransactionSystem".wallets (addres, balance) VALUES ($1, $2)`
+
+	_, err := wr.db.Exec(ctx, query, address, balance)
+	if err != nil {
+		return fmt.Errorf("failed to create wallet: %w", err)
+	}
+
+	return nil
+}
+
+func (wr *WalletRepository) GetWalletBalance(ctx context.Context, address string) (float64, error) {
+	query := `SELECT balance FROM "TransactionSystem".wallets WHERE addres = $1`
+
+	var balance float64
+	
+	err := wr.db.QueryRow(ctx, query, address).Scan(&balance)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+            return 0, fmt.Errorf("wallet with address %v not found: %w", address, err)
+        }
+        return 0, fmt.Errorf("failed to find wallet with address %v: %w", address, err)
+	}
+
+	return balance, nil
+}
+
+func (wr *WalletRepository) UpdateWalletBalabnce(ctx context.Context, address string, balance float64) error {
+	query := `UPDATE "TransactionSystem".wallets SET balance = $1 WHERE address = $2`
+
+	_, err := wr.db.Exec(ctx, query, balance, address)
+    if err != nil {
+        return fmt.Errorf("failed to update wallet with address %v: %w", address, err)
+    }
+
+
+	return nil
+}
+
+func (wr *WalletRepository) RemoveWallet(ctx context.Context, address string) error {
+	query := `DELETE "TransactionSystem".wallets WHERE address = $1`
+
+	_, err := wr.db.Exec(ctx, query, address)
+    if err != nil {
+        return fmt.Errorf("failed to delete wallet with address %v: %w", address, err)
+    }
+
+
+	return nil
+}
