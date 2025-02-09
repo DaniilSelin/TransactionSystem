@@ -1,6 +1,8 @@
 package models 
 
-import ()
+import (
+	"time"
+)
 
 type Wallet struct {
 	Address   string    `json:"address"`
