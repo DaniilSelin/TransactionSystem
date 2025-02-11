@@ -1,4 +1,4 @@
-# Используем официальный образ Go для сборки
+# Используем официальный образ Go для сборки, позже попробую в alpine/ubuntu скомпилировать go код
 FROM golang:1.22 AS builder
 
 WORKDIR /app
@@ -18,7 +18,6 @@ FROM alpine:latest
 
 WORKDIR /root/
 
-# Устанавливаем зависимости
 RUN apk --no-cache add ca-certificates
 
 # Копируем собранный бинарник
@@ -27,8 +26,6 @@ COPY --from=builder /app/transaction-system .
 # Копируем конфигурацию
 COPY ../config/config.yml ./config/config.yml
 
-# Открываем порт
 EXPOSE 8080
 
-# Запускаем приложение
 CMD ["./transaction-system"]
