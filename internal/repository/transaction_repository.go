@@ -101,8 +101,6 @@ func (tr *TransactionRepository) GetTransactionByInfo(ctx context.Context, from,
 
     var t models.Transaction
 
-    createdAt = createdAt.Truncate(time.Second) // чтобы не было проблем с миллисекундами
-
     err := tr.db.QueryRow(ctx, query, from, to, createdAt).Scan(
         &t.Id,
         &t.From,

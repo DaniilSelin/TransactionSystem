@@ -97,3 +97,15 @@ func (wr *WalletRepository) RemoveWallet(ctx context.Context, address string) er
 
 	return nil
 }
+
+func (wr *WalletRepository) IsEmpty(ctx context.Context) (bool, error) {
+    query := `SELECT COUNT(*) FROM "TransactionSystem".wallets`
+    
+    var count int
+    err := wr.db.QueryRow(ctx, query).Scan(&count)
+    if err != nil {
+        return false, fmt.Errorf("failed to check wallets: %w", err)
+    }
+    
+    return count == 0, nil
+}

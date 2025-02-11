@@ -16,7 +16,6 @@ func RunMigrations(ctx context.Context, conn *pgxpool.Pool) error {
 		"internal/database/migrations/create_transactions.sql",
 		"internal/database/migrations/create_idx_created_at.sql",
 	}
-
 	for _, file := range files {
 		// Читаем содержимое файла
 		sqlContent, err := ioutil.ReadFile(file)

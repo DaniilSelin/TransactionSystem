@@ -18,12 +18,21 @@ func NewWalletService(walletRepo *repository.WalletRepository) *WalletService {
 	return &WalletService{walletRepo: walletRepo}
 }
 
-func (ws *WalletService) CreateWallet(ctx context.Context) (string, error) {
+func (ws *WalletService) CreateWallet(ctx context.Context, balance float64) (string, error) {
 	address := uuid.New().String()
-	if err := ws.walletRepo.CreateWallet(ctx, address, 0.0); err != nil {
+
+	if (balance < 0) {
+		return "", fmt.Errorf("failed to create wallet: balance can't be negative")
+	}
+
+	if err := ws.walletRepo.CreateWallet(ctx, address, balance); err != nil {
 		return "", fmt.Errorf("failed to create wallet: %w", err)
 	}
 	return address, nil
+}
+
+func (ws *WalletService) IsEmpty(ctx context.Context) (bool, error) {
+	return ws.walletRepo.IsEmpty(ctx)
 }
 
 func (ws *WalletService) GetBalance(ctx context.Context, address string) (float64, error) {
