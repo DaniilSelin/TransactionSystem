@@ -16,6 +16,7 @@ TransactionSystem — это система для управления тран
   
 
 	/project-root
+
 	│── /cmd/server/main.go         # Точка входа в приложение
 
 	│── /config                     # Конфигурация приложения
