@@ -16,7 +16,7 @@ services:
 
   app:
     build:
-      context: .
+      context: ..
       dockerfile: build/Dockerfile 
     container_name: transaction_app
     restart: always

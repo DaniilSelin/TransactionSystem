@@ -7,7 +7,7 @@
 ---
 
 ## 1. Отправка денег
-### `POST /send`
+### `POST api/send`
 **Описание:** Отправляет деньги с одного кошелька на другой.
 
 ### **Запрос:**
@@ -28,7 +28,7 @@
 ---
 
 ## 2. Получение последних транзакций
-### `GET /transactions?count={count}`
+### `GET api/transactions?count={count}`
 **Описание:** Возвращает список последних транзакций.
 
 ### **Параметры запроса:**
@@ -36,7 +36,7 @@
 
 ### **Пример запроса:**
 ```
-GET /transactions?count=1
+GET api/transactions?count=1
 ```
 
 ### **Ответ (JSON):**
@@ -55,12 +55,12 @@ GET /transactions?count=1
 ---
 
 ## 3. Получение баланса кошелька
-### `GET /wallet/{address}/balance`
+### `GET api/wallet/{address}/balance`
 **Описание:** Возвращает баланс указанного кошелька.
 
 ### **Пример запроса:**
 ```
-GET /wallet/wallet_123/balance
+GET api/wallet/wallet_123/balance
 ```
 
 ### **Ответ (JSON):**
@@ -73,7 +73,7 @@ GET /wallet/wallet_123/balance
 ---
 
 ## 4. Создание нового кошелька
-### `POST /wallet/create`
+### `POST api/wallet/create`
 **Описание:** Создаёт новый кошелек. Адрес кошелька представляет собой uuid.
 
 ### **Запрос:**
@@ -94,12 +94,12 @@ GET /wallet/wallet_123/balance
 ---
 
 ## 5. Получение информации о кошельке
-### `GET /wallet/{address}`
+### `GET api/wallet/{address}`
 **Описание:** Возвращает информацию о кошельке.
 
 ### **Пример запроса:**
 ```
-GET /wallet/wallet_123
+GET api/wallet/wallet_123
 ```
 
 ### **Ответ (JSON):**
@@ -113,12 +113,12 @@ GET /wallet/wallet_123
 ---
 
 ## 6. Удаление кошелька
-### `DELETE /wallet/{address}`
+### `DELETE api/wallet/{address}`
 **Описание:** Удаляет кошелек.
 
 ### **Пример запроса:**
 ```
-DELETE /wallet/wallet_123
+DELETE api/wallet/wallet_123
 ```
 
 ### **Ответ:**
@@ -129,12 +129,12 @@ DELETE /wallet/wallet_123
 ---
 
 ## 7. Получение информации о транзакции по ID
-### `GET /transaction/{id}`
+### `GET api/transaction/{id}`
 **Описание:** Возвращает информацию о транзакции.
 
 ### **Пример запроса:**
 ```
-GET /transaction/1
+GET api/transaction/1
 ```
 
 ### **Ответ (JSON):**
@@ -151,12 +151,12 @@ GET /transaction/1
 ---
 
 ## 8. Удаление транзакции
-### `DELETE /transaction/{id}`
+### `DELETE api/transaction/{id}`
 **Описание:** Удаляет транзакцию.
 
 ### **Пример запроса:**
 ```
-DELETE /transaction/1
+DELETE api/transaction/1
 ```
 
 ### **Ответ:**
@@ -167,12 +167,12 @@ DELETE /transaction/1
 ---
 
 ## 9. Получение транзакции по параметрам
-### `GET /transaction/{from}/{to}/{createdAt}`
+### `GET api/transaction/{from}/{to}/{createdAt}`
 **Описание:** Возвращает транзакцию по параметрам отправителя, получателя и времени создания.
 
 ### **Пример запроса:**
 ```
-GET /transaction/wallet_123/wallet_456/2024-02-10T15:04:05Z
+GET api/transaction/wallet_123/wallet_456/2024-02-10T15:04:05Z
 ```
 
 ### **Ответ (JSON):**

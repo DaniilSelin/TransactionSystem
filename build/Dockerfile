@@ -1,4 +1,3 @@
-# Используем официальный образ Go для сборки, позже попробую в alpine/ubuntu скомпилировать go код
 FROM golang:1.22 AS builder
 
 WORKDIR /app
@@ -25,6 +24,9 @@ COPY --from=builder /app/transaction-system .
 
 # Копируем конфигурацию
 COPY ../config/config.yml ./config/config.yml
+
+# Новая строка: 
+COPY internal/database/migrations ./internal/database/migrations
 
 EXPOSE 8080
 
